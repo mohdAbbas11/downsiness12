@@ -1,0 +1,100 @@
+===============================================
+ARDUINO DROWSINESS DETECTION ALERT SYSTEM
+CIRCUIT SETUP INSTRUCTIONS
+===============================================
+
+COMPONENTS NEEDED:
+-----------------
+1. Arduino Uno or compatible board
+2. Piezo Buzzer
+3. 3 LEDs (Red, Yellow, Green)
+4. 3 Resistors (220 ohm) for LEDs
+5. Jumper wires
+6. Breadboard
+
+CONNECTIONS:
+-----------
+1. BUZZER:
+   - Connect positive (longer) leg to Arduino PIN 9
+   - Connect negative (shorter) leg to GND
+
+2. RED LED (Alert):
+   - Connect anode (longer leg) through a 220 ohm resistor to Arduino PIN 6
+   - Connect cathode (shorter leg) to GND
+
+3. YELLOW LED (Warning):
+   - Connect anode (longer leg) through a 220 ohm resistor to Arduino PIN 5
+   - Connect cathode (shorter leg) to GND
+
+4. GREEN LED (Normal state):
+   - Connect anode (longer leg) through a 220 ohm resistor to Arduino PIN 4
+   - Connect cathode (shorter leg) to GND
+
+CIRCUIT DIAGRAM (ASCII):
+----------------------
+                        ____________________
+                       |                    |
+                       |    ARDUINO UNO    |
+                       |                    |
+    BUZZER             |                    |
+    [~]----------------|PIN 9              |
+     |                 |                    |
+     |                 |                    |
+    GND----------------|GND                |
+                       |                    |
+    RED LED            |                    |
+    |>|                |                    |
+    |||---[220Ω]-------|PIN 6              |
+    GND----------------|GND                |
+                       |                    |
+    YELLOW LED         |                    |
+    |>|                |                    |
+    |||---[220Ω]-------|PIN 5              |
+    GND----------------|GND                |
+                       |                    |
+    GREEN LED          |                    |
+    |>|                |                    |
+    |||---[220Ω]-------|PIN 4              |
+    GND----------------|GND                |
+                       |                    |
+                       |____________________|
+
+TESTING THE CIRCUIT:
+------------------
+1. Upload the "arduino_drowsiness_alert.ino" sketch to your Arduino
+2. When powered on, you should see:
+   - All LEDs blink twice
+   - Buzzer plays ascending tones
+   - Green LED stays on (normal state)
+
+3. Use the arduino_test.py script to test communication:
+   - Run: python arduino_test.py
+   - Select your Arduino's COM port
+   - The script will send test signals to verify all alerts work
+
+TROUBLESHOOTING:
+--------------
+1. No LEDs light up:
+   - Check power to Arduino
+   - Verify LED polarity (longer leg should connect to Arduino pins through resistors)
+   - Check resistor connections
+
+2. No sound from buzzer:
+   - Check buzzer polarity
+   - Try a different buzzer
+   - Verify PIN 9 connection
+
+3. Communication issues:
+   - Verify correct COM port is selected
+   - Check USB connection
+   - Try resetting Arduino
+   - Close any other programs that might be using the serial port
+
+ALERT SIGNALS:
+------------
+The system sends the following codes to Arduino:
+- '0': Normal state (green LED on)
+- '1': Drowsiness detected (red LED blinking + high-pitched buzzer)
+- '2': Yawning detected (yellow LED blinking)
+- '3': Head down detected (red LED blinking + medium-pitched buzzer)
+- '4': Eyes closed detected (red LED blinking + different-pitched buzzer) 
